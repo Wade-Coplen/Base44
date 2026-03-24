@@ -2,7 +2,6 @@
   --bg: #efe5d4;
   --bg-strong: #e2d0b1;
   --panel: rgba(37, 28, 20, 0.9);
-  --panel-soft: rgba(59, 45, 31, 0.82);
   --text: #1d1711;
   --text-inverse: #f7f2ea;
   --muted: #786858;
@@ -53,7 +52,9 @@ textarea {
 }
 
 .sidebar:hover,
-.sidebar.is-pinned {
+.sidebar:focus-within,
+.sidebar.is-pinned,
+.sidebar.is-temporary-open {
   transform: translateX(0);
 }
 
@@ -64,6 +65,9 @@ textarea {
   display: grid;
   place-items: center;
   cursor: ew-resize;
+  border: 0;
+  padding: 0;
+  background: transparent;
 }
 
 .sidebar__edge span {
@@ -84,6 +88,24 @@ textarea {
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  border: 0;
+  padding: 0;
+  background: rgba(29, 23, 17, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.sidebar.is-pinned + .sidebar-backdrop,
+.sidebar.is-temporary-open + .sidebar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .eyebrow {
@@ -149,9 +171,9 @@ textarea {
 }
 
 .chat-view {
+  position: relative;
   min-height: 100vh;
   padding: 36px 40px 28px 56px;
-  margin-left: 0;
   display: grid;
   grid-template-rows: auto 1fr auto;
   gap: 28px;
@@ -164,9 +186,23 @@ textarea {
   gap: 16px;
 }
 
+.chat-view__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .chat-view__header h2 {
   max-width: 720px;
   font-size: clamp(2.2rem, 4vw, 4.8rem);
+}
+
+.chat-view__subhead {
+  margin: 12px 0 0;
+  max-width: 540px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .pin-toggle,
@@ -181,6 +217,18 @@ textarea {
 
 .pin-toggle[aria-pressed="true"] {
   background: linear-gradient(135deg, #2f2418, #5d4733);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(29, 23, 17, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 251, 246, 0.72);
+  color: var(--muted);
+  box-shadow: var(--shadow);
 }
 
 .messages {
@@ -288,6 +336,11 @@ kbd {
 
   .chat-view__header {
     flex-direction: column;
+  }
+
+  .chat-view__actions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .messages {

@@ -11,50 +11,56 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Previous chats">
-      <div class="sidebar__edge" aria-hidden="true">
+    <aside class="sidebar" aria-label="Previous chats" data-state="hover">
+      <button class="sidebar__edge" type="button" aria-label="Reveal chat history">
         <span></span>
-      </div>
+      </button>
       <div class="sidebar__panel">
         <div class="sidebar__header">
           <p class="eyebrow">Conversation List</p>
           <h1>Recent chats</h1>
-          <p class="sidebar__hint">Hover near the left edge to peek. Press <kbd>[</kbd> to pin, <kbd>]</kbd> to release.</p>
+          <p class="sidebar__hint">Hover or tap the left edge to peek. Press <kbd>[</kbd> to pin, <kbd>]</kbd> or <kbd>Esc</kbd> to release.</p>
         </div>
         <nav class="chat-list">
           <button class="chat-list__item">
             <span class="chat-list__title">Roblox Montage Notes</span>
-            <span class="chat-list__meta">Today · 8 messages</span>
+            <span class="chat-list__meta">Today - 8 messages</span>
           </button>
           <button class="chat-list__item chat-list__item--active">
             <span class="chat-list__title">Focus Mode Prototype</span>
-            <span class="chat-list__meta">Now · active thread</span>
+            <span class="chat-list__meta">Now - active thread</span>
           </button>
           <button class="chat-list__item">
             <span class="chat-list__title">UI Animation Ideas</span>
-            <span class="chat-list__meta">Yesterday · 14 messages</span>
+            <span class="chat-list__meta">Yesterday - 14 messages</span>
           </button>
           <button class="chat-list__item">
             <span class="chat-list__title">Sidebar Collapse Test</span>
-            <span class="chat-list__meta">Mar 22 · 6 messages</span>
+            <span class="chat-list__meta">Mar 22 - 6 messages</span>
           </button>
           <button class="chat-list__item">
             <span class="chat-list__title">Command Palette Sketch</span>
-            <span class="chat-list__meta">Mar 20 · 11 messages</span>
+            <span class="chat-list__meta">Mar 20 - 11 messages</span>
           </button>
         </nav>
       </div>
     </aside>
+
+    <button class="sidebar-backdrop" type="button" aria-label="Hide chat history"></button>
 
     <main class="chat-view">
       <header class="chat-view__header">
         <div>
           <p class="eyebrow">Focus Mode</p>
           <h2>Current conversation gets the whole screen</h2>
+          <p class="chat-view__subhead">The archive stays nearby, but not in your face.</p>
         </div>
-        <button id="pinToggle" class="pin-toggle" type="button" aria-pressed="false">
-          Pin sidebar
-        </button>
+        <div class="chat-view__actions">
+          <span id="focusStatus" class="status-pill">Hover reveal active</span>
+          <button id="pinToggle" class="pin-toggle" type="button" aria-pressed="false">
+            Pin sidebar
+          </button>
+        </div>
       </header>
 
       <section class="messages" aria-label="Current chat">
@@ -73,7 +79,7 @@
         <article class="message message--assistant">
           <p class="message__author">Assistant</p>
           <div class="message__bubble">
-            <p>This version reveals the history on hover, and lets you pin it when you need to browse for longer.</p>
+            <p>This version reveals the history on hover, lets you tap the edge to open it temporarily, and keeps a pinned mode for longer browsing.</p>
           </div>
         </article>
       </section>
@@ -82,7 +88,7 @@
         <label class="sr-only" for="prompt">Message</label>
         <textarea id="prompt" rows="3" placeholder="Type here. The left edge reveals prior chats."></textarea>
         <div class="composer__actions">
-          <span class="composer__hint">Hover left edge or press <kbd>[</kbd></span>
+          <span class="composer__hint">Hover left edge, tap the handle, or press <kbd>[</kbd></span>
           <button type="button">Send</button>
         </div>
       </form>
