@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Focus Mode Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Previous chats">
+      <div class="sidebar__edge" aria-hidden="true">
+        <span></span>
+      </div>
+      <div class="sidebar__panel">
+        <div class="sidebar__header">
+          <p class="eyebrow">Conversation List</p>
+          <h1>Recent chats</h1>
+          <p class="sidebar__hint">Hover near the left edge to peek. Press <kbd>[</kbd> to pin, <kbd>]</kbd> to release.</p>
+        </div>
+        <nav class="chat-list">
+          <button class="chat-list__item">
+            <span class="chat-list__title">Roblox Montage Notes</span>
+            <span class="chat-list__meta">Today · 8 messages</span>
+          </button>
+          <button class="chat-list__item chat-list__item--active">
+            <span class="chat-list__title">Focus Mode Prototype</span>
+            <span class="chat-list__meta">Now · active thread</span>
+          </button>
+          <button class="chat-list__item">
+            <span class="chat-list__title">UI Animation Ideas</span>
+            <span class="chat-list__meta">Yesterday · 14 messages</span>
+          </button>
+          <button class="chat-list__item">
+            <span class="chat-list__title">Sidebar Collapse Test</span>
+            <span class="chat-list__meta">Mar 22 · 6 messages</span>
+          </button>
+          <button class="chat-list__item">
+            <span class="chat-list__title">Command Palette Sketch</span>
+            <span class="chat-list__meta">Mar 20 · 11 messages</span>
+          </button>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="chat-view">
+      <header class="chat-view__header">
+        <div>
+          <p class="eyebrow">Focus Mode</p>
+          <h2>Current conversation gets the whole screen</h2>
+        </div>
+        <button id="pinToggle" class="pin-toggle" type="button" aria-pressed="false">
+          Pin sidebar
+        </button>
+      </header>
+
+      <section class="messages" aria-label="Current chat">
+        <article class="message message--assistant">
+          <p class="message__author">Assistant</p>
+          <div class="message__bubble">
+            <p>The sidebar stays hidden so the current chat can breathe.</p>
+          </div>
+        </article>
+        <article class="message message--user">
+          <p class="message__author">You</p>
+          <div class="message__bubble">
+            <p>I still want access to old chats, just not all the time.</p>
+          </div>
+        </article>
+        <article class="message message--assistant">
+          <p class="message__author">Assistant</p>
+          <div class="message__bubble">
+            <p>This version reveals the history on hover, and lets you pin it when you need to browse for longer.</p>
+          </div>
+        </article>
+      </section>
+
+      <form class="composer">
+        <label class="sr-only" for="prompt">Message</label>
+        <textarea id="prompt" rows="3" placeholder="Type here. The left edge reveals prior chats."></textarea>
+        <div class="composer__actions">
+          <span class="composer__hint">Hover left edge or press <kbd>[</kbd></span>
+          <button type="button">Send</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
